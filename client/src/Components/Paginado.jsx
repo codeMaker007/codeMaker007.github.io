@@ -16,7 +16,8 @@ export default function Paginado ({dogsPerPage, allDogs, paginado }) {
                             {number}
                         </div>
                     </li>
-                ))} </ul>
+                ))} 
+            </ul>
         </nav>
     ) 
 }

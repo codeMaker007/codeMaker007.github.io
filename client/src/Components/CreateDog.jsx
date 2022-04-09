@@ -273,7 +273,7 @@ export default function PostDog() {
                     </div>
 
                     <div>
-                        <button className={s.button} disabled={input.temperament.length === 0 || Object.keys(errors).length > 0} type='submit'> Create your own dog</button>
+                        <button className={s.button}  type='submit' onClick= { e => handleSubmit(e)}> Create your own dog</button>
                     </div>
 
 
