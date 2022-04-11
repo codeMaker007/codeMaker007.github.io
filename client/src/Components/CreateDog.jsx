@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createDog, getTemperaments } from '../Actions';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, /*useNavigate*/ } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import s from './CreateDog.module.css'
 
@@ -50,7 +50,7 @@ function validate(input) {
 
 export default function PostDog() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const temperaments = useSelector((state) => state.temperaments)
 
     const [errors, setErrors] = useState("")
@@ -114,7 +114,7 @@ export default function PostDog() {
                 image: "",
                 temperament: []
             })
-            navigate.push("/home")
+            //navigate.push("/home")
 
         }
         
