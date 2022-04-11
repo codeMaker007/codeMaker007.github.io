@@ -1,7 +1,7 @@
 const { Router } = require ("express");
 const { Dog, Temperament } = require("../db");
 const router = Router();
-const { getAllDogs } = require("./controlador")
+const { getAllDogs,getDbInfo,getApiInfo } = require("./controlador")
 const axios = require ("axios");
 
 
@@ -27,22 +27,62 @@ catch (error){
 });
 
 
-router.get("/:id", async (req, res) => {
-try{  
+router.get("/:id", async (req, res, next) => {
+  
     const {id} = req.params
-    const totalDogs = await getAllDogs()
-    if(id){
+    //const apiDogs = await getDbInfo()
+    //const apiInfo = await getApiInfo()
+    
+    
+    if(id.length < 10){
+        try{
+            //console.log(id)
+        const totalDogs = await getApiInfo()
+        let convId = parseInt(id)
+        //console.log(convId)
         let dogId = await totalDogs.filter(
-            dog => id.length > 8 ? dog.id === id : 
-            (dog.id) === parseInt(id))
-        dogId.length?
-        res.status(200).json(dogId):
-        res.status(404).send('Dog not found')
+            dog =>  dog.id === convId 
+        )
+        
+        dogId.length === 0 ? res.send('id no encontrado'): res.send(dogId)
+        }
+        catch(error){
+            next(error)
+        }    
+    }else{
+        try{
+        
+            let apiInfo = await getDbInfo()
+            //console.log(id)
+        let createdDogs = apiInfo.filter(
+            dog => dog.id === id
+        )
+        // //console.log(createdDogs)
+        // let temp = createdDogs[0].temperaments
+        // //console.log(temp)
+        // let setTemp = temp.map(el => el.name)
+        // let tempString = setTemp.toString()
+        // console.log(tempString)
+        // let objDog = [{
+        // "id":createdDogs[0].id,
+        // "name": createdDogs[0].name,
+        // "life_span": createdDogs[0].life_span,
+        // "temperament": setTemp.toString(),
+        // "minweight": createdDogs[0].minheight,
+        // "maxweight": createdDogs[0].maxheight,
+        // "minheight": createdDogs[0].minheight,
+        // "maxheight": createdDogs[0].maxheight,
+        // "image": createdDogs[0].image
+        // }]
+        
+        res.send(createdDogs)
+        }
+        catch(error){
+            next(error)
+        }    
     }
-    }
-    catch(error){
-        next(error)
-    }
+    
+    
 })
 
 router.post ("/", async (req, res, next) => {

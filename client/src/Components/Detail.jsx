@@ -16,9 +16,10 @@ export default function Detail(props) {
         dispatch(getDetail(id));
 
     },[dispatch,id])
+    //console.log(id)
 
     const detailDog = useSelector((state) => state.detail)
-    console.log(detailDog)
+    //console.log(detailDog)
     
 
 

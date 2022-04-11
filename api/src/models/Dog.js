@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('dog', {
-    ID: {
+    id: {
       //UUID genera un numero random con letras y numeros que va a ser unico y no se va a repetir.
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
